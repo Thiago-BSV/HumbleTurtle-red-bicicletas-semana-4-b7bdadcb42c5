@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    a(href='/') Volver
+
+
+    br
+    br
+    br
+
+    h1 Iniciar sesión!
+
+    br
+    br
+
+    form(action='/login' method='post')
+        label(for='email') Email:
+        input#id(type='text' name='email' value=(data && data.email) ? data.email : '' )
+        
+        if errors && errors.email.confirm
+            = errors.email.message
+
+        br
+        label(for='password') Contraseña:
+        input#color(type='password' name='password')
+        
+        if errors && errors.password.confirm
+            = errors.password.message
+
+        br
+        br
+        input.btn(type='submit' value='OK')

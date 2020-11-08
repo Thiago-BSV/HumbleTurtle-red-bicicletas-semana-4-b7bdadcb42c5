@@ -1,0 +1,109 @@
+extends ../layout
+
+block content
+
+    style(type='text/css').
+        body{
+            background-color:black;
+        }
+
+        #login{
+            width:500px;
+            margin:10vh auto 0;
+            padding:30px;
+            background-color: white;
+            border-radius:5px;
+        }
+        
+        #login table{
+            width:100%
+        }
+
+        #login input[type='text'], #login input[type='password']{
+            width:100%;
+        }
+
+        input[type='submit']{
+            background-color:lightgray;
+            width: 100%;
+            text-align: center;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .info{
+            width: 400px;
+            margin:20px 10px;
+            padding:15px 30px;
+            background-color: #e2faff;
+            display:flex;
+        }
+
+
+    div#login
+
+        h1 Login
+
+        if info
+            span.info
+                = info.message
+
+        br
+        br
+        
+        #my-signin2
+
+        a(href='/auth/google')
+            button Ingresar con google
+
+        a(href='/auth/facebook')
+            button Ingresar con facebook
+
+        form(action='/auth/login' method='post')
+            //-----------------------------------------
+            table
+                //------------------------------------------
+                tr
+                    td
+                        label(for='email') Email:
+                    td
+                        input#color(type='text' name='email' value= (data && data.email) ? data.email : '')
+                        
+                        font(style="color:red; font-size:15px;")
+
+                            if errors && errors.complete_obligatorio.confirm
+                                | * required //
+
+                            if errors && errors.email.confirm
+                                small.text-danger
+                                = " " + errors.email.message
+
+                //------------------------------------------
+                tr
+                    td
+                        label(for='password') Password:
+                    td
+                        input#modelo(type='password' name='password')
+
+                        font(style="color:red; font-size:15px;")
+
+                            if errors && errors.complete_obligatorio.confirm
+                                | * required //
+
+                            if errors && errors.password.confirm
+                                small.text-danger
+                                = " " + errors.password.message
+                //------------------------------------------
+                tr
+                    td
+                    td(colspan="2")
+                        input.btn( type='submit' value='OK')
+            table(style='text-align:center;')
+                tr
+                    td
+                        a(href='/') << Volver
+                    td
+                        a(href='/auth/registrarse') Registrarme
+                    td
+                        a(href='/auth/solicitar-cambio-pass') Olvidé mi contraseña
+        

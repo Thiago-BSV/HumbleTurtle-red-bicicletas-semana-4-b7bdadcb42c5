@@ -1,0 +1,97 @@
+extends ../layout
+
+block content
+
+    style(type='text/css').
+        body{
+            background-color:black;
+        }
+
+        #login{
+            width:500px;
+            margin:10vh auto 0;
+            padding:30px;
+            background-color: white;
+            border-radius:5px;
+        }
+        
+        #login table{
+            width:100%
+        }
+
+        #login input[type='text'], #login input[type='password']{
+            width:100%;
+        }
+
+        input[type='submit']{
+            background-color:lightgray;
+            width: 100%;
+            text-align: center;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .info{
+            width: 400px;
+            margin:20px 10px;
+            padding:15px 30px;
+            background-color: #e2faff;
+            display:flex;
+        }
+
+
+    div#login
+
+        h1 Cambiar contraseña
+
+        if info
+            span.info
+                = info.message
+
+        br
+        br
+        
+        if !info || (info && !info.cambiada)
+            form(action='/auth/cambiar-contrasena' method='post')
+                input(type='hidden' name='token' value=token)
+                //-----------------------------------------
+                table
+                    //------------------------------------------
+                    tr
+                        td
+                            label(for='password') Password:
+                        td
+                            input(type='password' name='password')
+                            
+                            font(style="color:red; font-size:15px;")
+
+                                if errors && errors.complete_obligatorio.confirm
+                                    | * required //
+
+                                if errors && errors.email.confirm
+                                    small.text-danger
+                                    = " " + errors.email.message
+
+                    //------------------------------------------
+                    tr
+                        td
+                            label(for='password') Confirmar password:
+                        td
+                            input(type='password' name='confirmar_password')
+
+                            font(style="color:red; font-size:15px;")
+
+                                if errors && errors.complete_obligatorio.confirm
+                                    | * required //
+
+                                if errors && errors.password.confirm
+                                    small.text-danger
+                                    = " " + errors.password.message
+                    //------------------------------------------
+                    tr
+                        td
+                        td(colspan="2")
+                            input.btn( type='submit' value='OK')
+
+        a(href='/auth/login') << Volver al inicio
+            

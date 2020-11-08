@@ -1,0 +1,133 @@
+extends ../layout
+
+block content
+
+    style(type='text/css').
+        body{
+            background-color:black;
+        }
+
+        #page{
+            width:500px;
+            margin:10vh auto 0;
+            padding:30px;
+            background-color: white;
+            border-radius:5px;
+        }
+        
+        #page table{
+            width:100%
+        }
+
+        #page input[type='text'], #page input[type='password']{
+            width:100%;
+        }
+
+        input[type='submit']{
+            background-color:lightgray;
+            width: 100%;
+            text-align: center;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .info{
+            width: 400px;
+            margin:20px 10px;
+            padding:15px 30px;
+            background-color: #e2faff;
+            display:flex;
+        }
+
+
+    div#page
+
+        h1 Modificar cuenta
+
+        if info
+            span.info
+                = info.message
+
+        br
+        br
+
+        form(action='/usuarios/create' method='post')
+            input(type='hidden' name='id' value=usuario.id )
+
+            table
+                tr
+                    td
+                        //-----------------------------------------
+                        label(for='nombre') Nombre:
+                    td
+                        input#id(type='text' name='nombre' value = (data && data.nombre) ? data.nombre : usuario.nombre ) 
+
+                        font(style="color:red; font-size:15px;")
+
+                            if errors.complete_obligatorio.confirm
+                                | * required //
+
+                            if errors.nombre.confirm
+                                small.text-danger
+                                = " " + errors.nombre.message
+                tr
+                    td
+                        //------------------------------------------
+                        label(for='email') Email:
+                    td
+                        input#color(type='text' name='email' value=(data && data.email) ? data.email : usuario.email)
+                        
+                        font(style="color:red; font-size:15px;")
+
+                            if errors.complete_obligatorio.confirm
+                                | * required //
+
+                            if errors.email.confirm
+                                small.text-danger
+                                = " " + errors.email.message
+
+                tr
+                    td
+                        //------------------------------------------
+                        label(for='password') Password:
+                    td
+                        input#modelo(type='password' name='password')
+
+                        font(style="color:red; font-size:15px;")
+
+                            if errors.complete_obligatorio.confirm
+                                | * required //
+
+                            if errors.password.confirm
+                                small.text-danger
+                                = " " + errors.password.message
+
+                tr
+                    td
+                        //------------------------------------------
+                        label(for='confirm_password') Confirmar password:
+
+                    td
+                        input#modelo(type='password' name='confirm_password')
+
+                        font(style="color:red; font-size:15px;")
+
+                            if errors.complete_obligatorio.confirm
+                                | * required //
+
+                            if errors.password.confirm
+                                small.text-danger
+                                = " " + errors.password.message
+
+                tr
+                    td
+                    td
+                        //------------------------------------------
+                        br
+                        input.btn(type='submit' value='OK')
+            table
+                tr
+                    td
+                        a(href='/usuarios') Regresar
+                    td
+                        a(href='/') Página inicial

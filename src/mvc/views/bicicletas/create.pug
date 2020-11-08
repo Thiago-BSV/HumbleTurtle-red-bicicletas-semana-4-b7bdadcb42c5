@@ -1,0 +1,84 @@
+extends ../layout 
+
+block content
+
+    style(type='text/css').
+        body{
+            background-color:black;
+        }
+
+        #page{
+            width:500px;
+            margin:10vh auto 0;
+            padding:30px;
+            background-color: white;
+            border-radius:5px;
+        }
+        
+        #page table{
+            width:100%
+        }
+
+        #page input[type='text'], #page input[type='password']{
+            width:100%;
+        }
+
+        input[type='submit']{
+            background-color:lightgray;
+            width: 100%;
+            text-align: center;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .info{
+            width: 400px;
+            margin:20px 10px;
+            padding:15px 30px;
+            background-color: #e2faff;
+            display:flex;
+        }
+
+
+    div#page
+
+        h1 Nueva bicicleta
+        br
+
+        form(action='/bicicletas/create' method='post')
+            table
+                tr
+                    td
+                        label(for='code') ID:
+                    td
+                        input#id(type='text' name='code')
+                tr
+                    td
+                        label(for='color') Color:
+                    td
+                        input#color(type='text' name='color')
+                tr
+                    td
+                        label(for='modelo') Modelo:
+                    td
+                        input#modelo(type='text' name='modelo')
+                tr
+                    td
+                        label(for='lat') Latitud:
+                    td
+                        input#latitud(type='text' name='lat')
+                tr
+                    td
+                        label(for='lng') Longitud:
+                    td
+                        input#longitud(type='text' name='lng')
+                tr
+                    td
+                    td
+                        input.btn(type='submit' value='OK')
+            table
+                tr
+                    td
+                        a(href='/bicicletas') Regresar
+                    td
+                        a(href='/') Página inicial
