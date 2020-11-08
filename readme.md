@@ -1,5 +1,5 @@
 # Uso
-    git clone https://HumbleTurtle@bitbucket.org/HumbleTurtle/red-bicicletas.git
+
 
 ## Iniciar
     npm run devstart
